@@ -1,11 +1,12 @@
 package no.scienta.workshop.oooct22.quantity
 
-class CookingVolume(private val quantity: Int, private val unit: VolumeUnit) {
+class CookingVolume internal constructor(private val amount: Int) {
 
     override fun equals(other: Any?) = other is CookingVolume && equals(other)
 
-    private fun equals(other: CookingVolume) = quantity == other.quantity && unit === other.unit
+    private fun equals(other: CookingVolume) = amount == other.amount
 
-    override fun toString() = "$quantity $unit"
-    override fun hashCode(): Int = (quantity to unit).hashCode()
+    override fun toString() = "$amount teaspoons"
+
+    override fun hashCode(): Int = amount.hashCode()
 }
