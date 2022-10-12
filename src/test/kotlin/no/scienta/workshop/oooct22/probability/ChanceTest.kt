@@ -52,4 +52,12 @@ class ChanceTest {
         assertEquals(LIKELY and UNLIKELY, UNLIKELY and LIKELY)
         assertEquals(CERTAIN and UNLIKELY, UNLIKELY)
     }
+
+    @Test
+    fun or() {
+        assertEquals(LIKELY or IMPOSSIBLE, LIKELY)
+        assertEquals(LIKELY or LIKELY, 15 outOf 16)
+        assertEquals(LIKELY or UNLIKELY, UNLIKELY or LIKELY)
+        assertEquals(LIKELY or CERTAIN, CERTAIN)
+    }
 }

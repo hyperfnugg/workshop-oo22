@@ -23,6 +23,9 @@ class Chance private constructor(private val fraction: BigDecimal) {
     infix fun and(other: Chance) =
         Chance((this.fraction * other.fraction).setScale(5))
 
+    infix fun or(other: Chance) =
+        !(!this and !other)
+
 
     companion object {
         private const val SCALE = 5
