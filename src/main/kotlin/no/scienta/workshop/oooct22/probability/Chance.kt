@@ -5,8 +5,7 @@ import java.math.RoundingMode
 class Chance private constructor(private val fraction: BigDecimal) {
     init {
         require(fraction.scale() == SCALE)
-        require(fraction >= BigDecimal.ZERO)
-        require(fraction <= BigDecimal.ONE)
+        require(fraction in IMPOSSIBLE_FRACTION .. CERTAIN_FRACTION)
     }
 
     override fun equals(other: Any?) =
@@ -18,9 +17,14 @@ class Chance private constructor(private val fraction: BigDecimal) {
     override fun hashCode() =
         fraction.hashCode()
 
+    operator fun not() =
+        Chance(CERTAIN_FRACTION - fraction)
+
 
     companion object {
         private const val SCALE = 5
+        private val IMPOSSIBLE_FRACTION = BigDecimal.ZERO
+        private val CERTAIN_FRACTION = BigDecimal.ONE
         infix fun Number.outOf(total: Number) =
             (this.toDouble() / total.toDouble())
                 .let(Double::toBigDecimal)
