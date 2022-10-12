@@ -20,6 +20,9 @@ class Chance private constructor(private val fraction: BigDecimal) {
     operator fun not() =
         Chance(CERTAIN_FRACTION - fraction)
 
+    infix fun and(other: Chance) =
+        Chance((this.fraction * other.fraction).setScale(5))
+
 
     companion object {
         private const val SCALE = 5

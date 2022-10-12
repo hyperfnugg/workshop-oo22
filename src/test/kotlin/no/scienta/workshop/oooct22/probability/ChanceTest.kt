@@ -44,4 +44,12 @@ class ChanceTest {
         assertEquals(CERTAIN.not(), IMPOSSIBLE)
         assertEquals(!!LIKELY, LIKELY)
     }
+
+    @Test
+    fun and() {
+        assertEquals(CERTAIN and IMPOSSIBLE, IMPOSSIBLE)
+        assertEquals(LIKELY and LIKELY, 9 outOf 16)
+        assertEquals(LIKELY and UNLIKELY, UNLIKELY and LIKELY)
+        assertEquals(CERTAIN and UNLIKELY, UNLIKELY)
+    }
 }
