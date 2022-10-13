@@ -1,5 +1,7 @@
 package no.scienta.workshop.oooct22.quantity.test
 
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.Celsius
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.Fahrenheit
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Foot
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Gallon
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Inches
@@ -18,10 +20,13 @@ class QuantityTest {
 
     @Test
     fun `should do equality`() {
-        assertNotEquals(1 of Tablespoon, 1 of Teaspoon)
-        assertEquals(1 of Tablespoon, 1 of Tablespoon)
-        assertEquals(1 of Tablespoon, 3 of Teaspoon)
-        assertEquals(1 of Tablespoon, 3 of Teaspoon)
+//        assertNotEquals(1 of Tablespoon, 1 of Teaspoon)
+//        assertEquals(1 of Tablespoon, 1 of Tablespoon)
+//        assertEquals(1 of Tablespoon, 3 of Teaspoon)
+//        assertEquals(1 of Tablespoon, 3 of Teaspoon)
+//        assertEquals(0 of Celsius, 32 of Fahrenheit)
+        assertEquals(10 of Celsius, 50 of Fahrenheit)
+        assertEquals(-25 of Celsius, -13 of Fahrenheit)
 
         assertNotEquals(1 of Inches, 1 of Teaspoon)
 
