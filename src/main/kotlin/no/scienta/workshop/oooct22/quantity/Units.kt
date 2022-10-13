@@ -2,10 +2,7 @@
 
 package no.scienta.workshop.oooct22.quantity
 
-import no.scienta.workshop.oooct22.quantity.Dimension.Distance
-import no.scienta.workshop.oooct22.quantity.Dimension.Volume
-
-object Teaspoon : Unit<Volume>(1, Teaspoon, Volume)
+object Teaspoon : BaseUnit<Volume>(Volume)
 typealias Teaspoons = Teaspoon
 
 object Tablespoon : Unit<Volume>(3, Teaspoons)
@@ -26,7 +23,7 @@ typealias Quarts = Quart
 object Gallon : Unit<Volume>(4, Quarts)
 typealias Gallons = Gallon
 
-object Inch : Unit<Distance>(1, Inch, Distance)
+object Inch : BaseUnit<Distance>(Distance)
 typealias Inches = Inch
 
 object Foot : Unit<Distance>(12, Inches)

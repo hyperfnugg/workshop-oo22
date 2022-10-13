@@ -1,16 +1,26 @@
 package no.scienta.workshop.oooct22.quantity
 
+import java.lang.IllegalArgumentException
 import kotlin.IllegalStateException
 
-sealed class Unit<D : Dimension>(
+open class Unit<D : Dimension> private constructor(
     private val ratio: Int,
-    private val unit: Unit<D>?,
-    internal val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
+    private val unit: Unit<D>? = null,
+    internal val dimension: D = unit?.dimension
+        ?: throw IllegalStateException("The base unit needs an explicit dimension"),
 ) {
-    init {
-        require(ratio >= 1) { "The unit must be positive: $this != $ratio" }
-        require(unit != null || ratio == 1) { "The base unit must be unary: $this != $ratio" }
-    }
+
+    constructor(dimension: D) : this(
+        1,
+        null,
+        dimension
+    )
+
+    constructor(ratio: Int, unit: Unit<D>) : this(
+        ratio.takeIf { it > 0 } ?: throw IllegalArgumentException("The unit must be positive: $ratio"),
+        unit,
+        unit.dimension
+    )
 
     internal fun isComparableWith(unit: Unit<*>): Boolean = dimension === unit.dimension
 
@@ -21,4 +31,4 @@ sealed class Unit<D : Dimension>(
     override fun toString(): String = "${javaClass.simpleName}/${dimension}"
 }
 
-
+open class BaseUnit<D : Dimension>(dimension: D) : Unit<D>(dimension)
