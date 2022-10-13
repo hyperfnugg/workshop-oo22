@@ -1,5 +1,6 @@
 package no.scienta.workshop.oooct22.quantity.test
 
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.inch
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.pint
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.tableSpoon
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.teaSpoon
@@ -20,5 +21,10 @@ class CookingVolumesTest {
 
         assertEquals(hashSetOf(1.tableSpoon, 1.tableSpoon).size, 1)
         assertEquals(hashSetOf(1.teaSpoon, 1.teaSpoon, 1.teaSpoon).size, 1)
+    }
+
+    @Test
+    fun `should not compare across dimensions`() {
+        assertNotEquals(1.inch, 1.teaSpoon)
     }
 }
