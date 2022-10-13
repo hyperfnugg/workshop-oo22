@@ -7,7 +7,7 @@ import java.lang.IllegalStateException
 sealed class Unit<D : Dimension>(
     private val ratio: Int,
     private val unit: Unit<D>? = null,
-    val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
+    private val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
 ) {
 
     internal fun comparesWith(unit: Unit<*>): Boolean = dimension === unit.dimension
