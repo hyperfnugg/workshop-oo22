@@ -1,6 +1,15 @@
 package no.scienta.workshop.oooct22.quantity
 
-class CookingVolume internal constructor(private val amount: Int) {
+import java.math.BigDecimal
+
+private const val SCALE = 5
+
+class CookingVolume private constructor(private val amount: BigDecimal) {
+
+    constructor(amount: Int) : this(amount.toBigDecimal().setScale(SCALE))
+    init {
+        require(amount.scale() == SCALE)
+    }
 
     override fun equals(other: Any?) = other is CookingVolume && equals(other)
 
