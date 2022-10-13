@@ -6,5 +6,5 @@ sealed class Dimension {
 
     object Volume : Dimension()
 
-    override fun toString() = javaClass.simpleName
+    override fun toString(): String = javaClass.simpleName
 }
