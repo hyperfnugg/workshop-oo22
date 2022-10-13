@@ -1,21 +1,22 @@
+@file:Suppress("unused")
+
 package no.scienta.workshop.oooct22.quantity
 
-val Int.teaSpoon get() = this.toQuantity(Teaspoon)
+val Int.teaSpoon get() = Quantity(this, Teaspoon)
 
-val Int.tableSpoon get() = this.toQuantity(Tablespoon)
+val Int.tableSpoon get() = Quantity(this, Tablespoon)
 
-val Int.ounce get() = this.toQuantity(Ounce)
+val Int.ounce get() = Quantity(this, Ounce)
 
-val Int.cup get() = this.toQuantity(Cup)
+val Int.cup get() = Quantity(this, Cup)
 
-val Int.pint get() = this.toQuantity(Pint)
+val Int.pint get() = Quantity(this, Pint)
 
-val Int.quart get() = this.toQuantity(Quart)
+val Int.quart get() = Quantity(this, Quart)
 
-val Int.gallon get() = this.toQuantity(Gallon)
+val Int.gallon get() = Quantity(this, Gallon)
 
-val Int.inch get() = this.toQuantity(Inch)
+val Int.inch get() = Quantity(this, Inch)
 
-val Int.foot get() = this.toQuantity(Foot)
+val Int.foot get() = Quantity(this, Foot)
 
-private fun <D : Dimension> Int.toQuantity(unit: Unit<D>) = Quantity(this, unit)
