@@ -3,7 +3,7 @@ package no.scienta.workshop.oooct22.quantity
 import no.scienta.workshop.oooct22.quantity.Unit.Dimension.Volume
 import java.math.BigDecimal
 
-sealed class Unit(internal val ratio: Int, private val dimension: Dimension) {
+sealed class Unit(private val ratio: Int, private val dimension: Dimension) {
 
     private constructor(multiplier: Int, baseUnit: Unit) : this(multiplier * baseUnit.ratio, baseUnit.dimension)
 
@@ -17,15 +17,8 @@ sealed class Unit(internal val ratio: Int, private val dimension: Dimension) {
         object Quart : Unit(2, Pint)
         object Gallon : Unit(4, Quart)
 
-        val Int.teaSpoon get() = cookingVolume(Teaspoon)
-        val Int.tableSpoon get() = cookingVolume(Tablespoon)
-        val Int.ounce get() = cookingVolume(Ounce)
-        val Int.cup get() = cookingVolume(Cup)
-        val Int.pint get() = cookingVolume(Pint)
-        val Int.quart get() = cookingVolume(Quart)
-        val Int.gallon get() = cookingVolume(Gallon)
-
-        private operator fun Int.times(unit: Unit) = this * unit.ratio
+        infix fun Int.of(unit: Unit) =
+            Quantity(this, unit)
 
         private fun Int.cookingVolume(unit: Unit) = Quantity(this, unit)
     }
