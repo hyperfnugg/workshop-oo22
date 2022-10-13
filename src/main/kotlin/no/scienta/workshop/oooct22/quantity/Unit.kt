@@ -9,6 +9,9 @@ sealed class Unit<D : Dimension>(
     private val unit: Unit<D>? = null,
     private val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
 ) {
+    init {
+        require(unit != null || ratio == 1) { "Base unit must be arity 1: $this = $ratio" }
+    }
 
     internal fun comparesWith(unit: Unit<*>): Boolean = dimension === unit.dimension
 
