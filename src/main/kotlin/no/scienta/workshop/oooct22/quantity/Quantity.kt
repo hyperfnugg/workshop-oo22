@@ -7,7 +7,7 @@ private const val SCALE = 5
 
 class Quantity private constructor(private val amount: BigDecimal, private val unit: Unit) {
 
-    val presentationValue  get() = amount.setScale(2, RoundingMode.HALF_UP)
+    private val presentationValue get() : BigDecimal = amount.setScale(2, RoundingMode.HALF_UP)
 
     constructor(amount: Int, unit: Unit) : this(amount.toBigDecimal().setScale(SCALE), unit)
     init {
