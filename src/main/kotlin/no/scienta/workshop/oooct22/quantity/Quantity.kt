@@ -10,17 +10,20 @@ class Quantity private constructor(private val amount: BigDecimal, private val u
     private val presentationValue get() : BigDecimal = amount.setScale(2, RoundingMode.HALF_UP)
 
     constructor(amount: Int, unit: Unit) : this(amount.toBigDecimal().setScale(SCALE), unit)
+
     init {
         require(amount.scale() == SCALE)
     }
 
     override fun equals(other: Any?) = other is Quantity && equals(other)
 
-    private fun equals(other: Quantity) = other.convertTo(unit).presentationValue == presentationValue
+    private fun equals(other: Quantity) = unit.compatibleWith(other.unit)
+            && other.convertTo(unit).presentationValue == presentationValue
 
-    private fun convertTo(toUnit: Unit) = Quantity(toUnit.convert(amount, unit).setScale(SCALE, RoundingMode.HALF_UP), toUnit)
+    private fun convertTo(toUnit: Unit) =
+        Quantity(toUnit.convert(amount, unit).setScale(SCALE, RoundingMode.HALF_UP), toUnit)
 
     override fun toString() = "$presentationValue ${unit::class.java.simpleName}"
 
-    override fun hashCode(): Int = (unit.dimension to unit.convertToBaseUnit(presentationValue)).hashCode()
+    override fun hashCode(): Int = unit.hashCode(presentationValue)
 }

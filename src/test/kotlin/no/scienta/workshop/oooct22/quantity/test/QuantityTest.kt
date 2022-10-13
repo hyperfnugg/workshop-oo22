@@ -1,6 +1,7 @@
 package no.scienta.workshop.oooct22.quantity.test
 
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Foot
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.Inches
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Pint
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Tablespoon
 import no.scienta.workshop.oooct22.quantity.Unit.Companion.Teaspoon
@@ -18,6 +19,8 @@ class QuantityTest {
         assertEquals(1 of Tablespoon, 1 of Tablespoon)
         assertEquals(1 of Tablespoon, 3 of Teaspoon)
         assertEquals(1 of Tablespoon, 3 of Teaspoon)
+
+        assertNotEquals(1 of Inches, 1 of Teaspoon)
 
         assertEquals(1 of Yard, 3 of Foot)
         assertNotEquals(1 of Yard, 6 of Foot)

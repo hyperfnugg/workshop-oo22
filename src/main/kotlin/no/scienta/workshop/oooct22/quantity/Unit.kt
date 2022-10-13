@@ -27,12 +27,17 @@ sealed class Unit(private val ratio: Int, val dimension: Dimension) {
             Quantity(this, unit)
     }
 
-    internal fun convert(amount: BigDecimal, unit: Unit) =
-        unit.ratio.toBigDecimal().setScale(5) / this.ratio.toBigDecimal().setScale(5) * amount
+    internal fun convert(amount: BigDecimal, unit: Unit): BigDecimal {
+        require(compatibleWith(unit))
+        return unit.ratio.toBigDecimal().setScale(5) / this.ratio.toBigDecimal().setScale(5) * amount
+    }
 
-    fun convertToBaseUnit(amount: BigDecimal) = ratio.toBigDecimal().setScale(5) * amount
+    fun compatibleWith(other: Unit) = this.dimension ==  other.dimension
 
-     sealed interface Dimension {
+    fun hashCode(amount: BigDecimal) =
+        (dimension to ratio.toBigDecimal() * amount).hashCode()
+
+    sealed interface Dimension {
         object Volume : Dimension
         object Distance : Dimension
     }
