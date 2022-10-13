@@ -5,7 +5,7 @@ class Quantity<D : Dimension> internal constructor(private val amount: Int, priv
     private fun baseAmount() = unit.baseAmount(amount)
 
     override fun equals(other: Any?) =
-        other is Quantity<*> && unit.comparesWith(other.unit) && baseAmount() == other.baseAmount()
+        other is Quantity<*> && unit.isComparableWith(other.unit) && baseAmount() == other.baseAmount()
 
     override fun hashCode(): Int = (amount to unit).hashCode()
 

@@ -2,7 +2,7 @@
 
 package no.scienta.workshop.oooct22.quantity
 
-import java.lang.IllegalStateException
+import kotlin.IllegalStateException
 
 sealed class Unit<D : Dimension>(
     private val ratio: Int,
@@ -10,10 +10,11 @@ sealed class Unit<D : Dimension>(
     private val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
 ) {
     init {
-        require(unit != null || ratio == 1) { "Base unit must be unary: $this = $ratio" }
+        require(ratio >= 1) { "The unit must be positive: $this != $ratio" }
+        require(unit != null || ratio == 1) { "The base unit must be unary: $this != $ratio" }
     }
 
-    internal fun comparesWith(unit: Unit<*>): Boolean = dimension === unit.dimension
+    internal fun isComparableWith(unit: Unit<*>): Boolean = dimension === unit.dimension
 
     internal fun baseAmount(amount: Int) = amount * chainedRatio
 
