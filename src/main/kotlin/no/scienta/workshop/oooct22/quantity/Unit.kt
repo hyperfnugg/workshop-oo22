@@ -1,9 +1,11 @@
 package no.scienta.workshop.oooct22.quantity
 
+import no.scienta.workshop.oooct22.quantity.Unit.Dimension.Distance
 import no.scienta.workshop.oooct22.quantity.Unit.Dimension.Volume
 import java.math.BigDecimal
 
-sealed class Unit(private val ratio: Int, private val dimension: Dimension) {
+@Suppress("unused")
+sealed class Unit(private val ratio: Int, val dimension: Dimension) {
 
     private constructor(multiplier: Int, baseUnit: Unit) : this(multiplier * baseUnit.ratio, baseUnit.dimension)
 
@@ -17,17 +19,20 @@ sealed class Unit(private val ratio: Int, private val dimension: Dimension) {
         object Quart : Unit(2, Pint)
         object Gallon : Unit(4, Quart)
 
+        object Inches : Unit(1, Distance)
+        object Foot : Unit(12, Inches)
+        object Yard : Unit(3, Foot)
+
         infix fun Int.of(unit: Unit) =
             Quantity(this, unit)
-
-        private fun Int.cookingVolume(unit: Unit) = Quantity(this, unit)
     }
 
-    private fun asTeaspoons(quantity: Int) = quantity * ratio
     internal fun convert(amount: BigDecimal, unit: Unit) =
         unit.ratio.toBigDecimal().setScale(5) / this.ratio.toBigDecimal().setScale(5) * amount
 
-    private sealed interface Dimension {
+    fun convertToBaseUnit(amount: BigDecimal) = ratio.toBigDecimal().setScale(5) * amount
+
+     sealed interface Dimension {
         object Volume : Dimension
         object Distance : Dimension
     }

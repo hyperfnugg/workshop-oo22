@@ -22,5 +22,5 @@ class Quantity private constructor(private val amount: BigDecimal, private val u
 
     override fun toString() = "$presentationValue ${unit::class.java.simpleName}"
 
-    override fun hashCode(): Int = amount.hashCode()
+    override fun hashCode(): Int = (unit.dimension to unit.convertToBaseUnit(presentationValue)).hashCode()
 }
