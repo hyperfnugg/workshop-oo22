@@ -1,13 +1,13 @@
 package no.scienta.workshop.oooct22.quantity.test
 
-import no.scienta.workshop.oooct22.quantity.VolumeUnit.Companion.pint
-import no.scienta.workshop.oooct22.quantity.VolumeUnit.Companion.tableSpoon
-import no.scienta.workshop.oooct22.quantity.VolumeUnit.Companion.teaSpoon
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.pint
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.tableSpoon
+import no.scienta.workshop.oooct22.quantity.Unit.Companion.teaSpoon
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
 
-class CookingVolumesTest {
+class QuantityTest {
 
     @Test
     fun `should do equality`() {
