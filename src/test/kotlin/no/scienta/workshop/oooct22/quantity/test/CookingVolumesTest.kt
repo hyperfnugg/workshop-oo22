@@ -21,13 +21,14 @@ class CookingVolumesTest {
 
         assertEquals(hashSetOf(1.tableSpoon, 3.teaSpoons).size, 1)
         assertEquals(hashSetOf(30.teaSpoons, 10.tableSpoons, 5.ounces).size, 1)
+        assertEquals(hashSetOf(30.teaSpoons, 10.tableSpoons, 5.ounces, 1.teaSpoon).size, 2)
 
-        assertEquals(hashSetOf(30.teaSpoons, 1.inch, 5.ounces).size, 2)
-        assertEquals(hashSetOf(1.teaSpoon, 1.inch).size, 2)
     }
 
     @Test
     fun `should not compare across dimensions`() {
         assertNotEquals(1.inch, 1.teaSpoon)
+        assertEquals(hashSetOf(1.teaSpoon, 1.inch).size, 2)
+        assertEquals(hashSetOf(30.teaSpoons, 1.inch, 5.ounces).size, 2)
     }
 }
