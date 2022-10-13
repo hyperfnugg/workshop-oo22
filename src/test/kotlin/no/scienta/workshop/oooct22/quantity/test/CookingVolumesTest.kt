@@ -1,9 +1,9 @@
 package no.scienta.workshop.oooct22.quantity.test
 
-import no.scienta.workshop.oooct22.quantity.Unit.Companion.inch
-import no.scienta.workshop.oooct22.quantity.Unit.Companion.pint
-import no.scienta.workshop.oooct22.quantity.Unit.Companion.tableSpoon
-import no.scienta.workshop.oooct22.quantity.Unit.Companion.teaSpoon
+import no.scienta.workshop.oooct22.quantity.inch
+import no.scienta.workshop.oooct22.quantity.pint
+import no.scienta.workshop.oooct22.quantity.tableSpoon
+import no.scienta.workshop.oooct22.quantity.teaSpoon
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
