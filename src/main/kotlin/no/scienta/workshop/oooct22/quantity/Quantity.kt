@@ -27,14 +27,9 @@ class Quantity private constructor(private val amount: BigDecimal, private val u
 
     override fun hashCode(): Int = unit.hashCode(presentationValue)
 
-    operator fun plus(other: Quantity) : Quantity {
-        require(unit.compatibleWith(other.unit))
-        return Quantity(amount + other.convertTo(unit).amount, unit)
-    }
+    operator fun plus(other: Quantity) = Quantity(amount + other.convertTo(unit).amount, unit)
 
-    operator fun minus(other: Quantity) =
-        this + (-other)
+    operator fun minus(other: Quantity) = this + (-other)
 
-    operator fun unaryMinus() =
-        Quantity(-amount, unit)
+    operator fun unaryMinus() = Quantity(-amount, unit)
 }
