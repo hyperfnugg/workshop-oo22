@@ -6,13 +6,32 @@ import no.scienta.workshop.oooct22.quantity.Dimension.Distance
 import no.scienta.workshop.oooct22.quantity.Dimension.Volume
 
 object Teaspoon : Unit<Volume>(1, Teaspoon, Volume)
-object Tablespoon : Unit<Volume>(3, Teaspoon)
-object Ounce : Unit<Volume>(2, Tablespoon)
-object Cup : Unit<Volume>(8, Ounce)
-object Pint : Unit<Volume>(2, Cup)
-object Quart : Unit<Volume>(2, Pint)
-object Gallon : Unit<Volume>(4, Quart)
+typealias Teaspoons = Teaspoon
+
+object Tablespoon : Unit<Volume>(3, Teaspoons)
+typealias Tablespoons = Tablespoon
+
+object Ounce : Unit<Volume>(2, Tablespoons)
+typealias Ounces = Ounce
+
+object Cup : Unit<Volume>(8, Ounces)
+typealias Cups = Cup
+
+object Pint : Unit<Volume>(2, Cups)
+typealias Pints = Pint
+
+object Quart : Unit<Volume>(2, Pints)
+typealias Quarts = Quart
+
+object Gallon : Unit<Volume>(4, Quarts)
+typealias Gallons = Gallon
 
 object Inch : Unit<Distance>(1, Inch, Distance)
-object Foot : Unit<Distance>(12, Inch)
-object Yard : Unit<Distance>(3, Foot)
+typealias Inches = Inch
+
+object Foot : Unit<Distance>(12, Inches)
+typealias Feet = Foot
+
+object Yard : Unit<Distance>(3, Feet)
+typealias Yards = Yard
+

@@ -1,13 +1,11 @@
-@file:Suppress("unused")
-
 package no.scienta.workshop.oooct22.quantity
 
 import kotlin.IllegalStateException
 
 sealed class Unit<D : Dimension>(
     private val ratio: Int,
-    private val unit: Unit<D>? = null,
-    private val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
+    private val unit: Unit<D>?,
+    internal val dimension: D = unit?.dimension ?: throw IllegalStateException("The base unit needs an explicit dimension"),
 ) {
     init {
         require(ratio >= 1) { "The unit must be positive: $this != $ratio" }
