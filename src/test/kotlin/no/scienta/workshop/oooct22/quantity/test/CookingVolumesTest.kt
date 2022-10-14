@@ -1,5 +1,6 @@
 package no.scienta.workshop.oooct22.quantity.test
 
+import no.scienta.workshop.oooct22.quantity.Quantity
 import no.scienta.workshop.oooct22.quantity.Units.cup
 import no.scienta.workshop.oooct22.quantity.Units.foot
 import no.scienta.workshop.oooct22.quantity.Units.inch
@@ -29,14 +30,11 @@ class CookingVolumesTest {
 
         assertEquals("9 feet", (9 unitsOf foot).toString())
 
-        val tablespoons = (2 unitsOf pint) convertedTo tablespoon
+        2 unitsOf pint convertedTo tablespoon shouldBe "64 tablespoons"
 
-        assertEquals("64 tablespoons", tablespoons.toString())
+        (2 unitsOf pint) + (3 unitsOf tablespoon) shouldBe "67 tablespoons"
 
-        val tablespoonsAdded = (2 unitsOf pint) + (3 unitsOf tablespoon)
-        assertEquals(tablespoonsAdded.toString(), "67 tablespoons")
-
-        assertEquals("30 feet", ((5 unitsOf yard) + (15 unitsOf foot)).toString())
+        (5 unitsOf yard) + (3 unitsOf foot) shouldBe "18 feet"
 
         assertEquals(setOf(1 unitOf tablespoon, 3 unitsOf teaspoon).size, 1)
         assertEquals(setOf(30 unitsOf teaspoon, 10 unitsOf tablespoon, 5 unitsOf ounce).size, 1)
@@ -48,8 +46,9 @@ class CookingVolumesTest {
                 1 unitOf teaspoon
             ).size, 2
         )
-
     }
+
+    private infix fun Quantity<*>.shouldBe(string: String) = assertEquals(string, toString())
 
     @Test
     fun `should not compare across dimensions`() {
