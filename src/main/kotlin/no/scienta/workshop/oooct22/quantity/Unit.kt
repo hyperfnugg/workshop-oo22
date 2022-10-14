@@ -10,9 +10,8 @@ class Unit<D : Dimension> private constructor(
     private val ratio: Int,
     private val unit: Unit<D>? = null,
     private val name: String,
-    private val pluralName: String = "${name}s",
-    internal val dimension: D = unit?.dimension
-        ?: throw IllegalStateException("The base unit needs an explicit dimension"),
+    private val plural: String,
+    internal val dimension: D,
 ) {
 
     constructor(dimension: D, name: String, pluralName: String)
@@ -37,5 +36,5 @@ class Unit<D : Dimension> private constructor(
         this.ratio * (unit?.takeIf { it != terminator }?.baseRatio(terminator) ?: 1)
 
     override fun toString(): String = "$name/${dimension}"
-    internal fun print(amount: Int): String = if (amount > 1) pluralName else name
+    internal fun print(amount: Int): String = if (amount > 1) plural else name
 }
