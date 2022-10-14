@@ -5,14 +5,14 @@ import java.math.RoundingMode
 class Chance private constructor(private val fraction: BigDecimal) {
     init {
         require(fraction.scale() == SCALE)
-        require(fraction in IMPOSSIBLE_FRACTION .. CERTAIN_FRACTION)
+        require(fraction in IMPOSSIBLE_FRACTION..CERTAIN_FRACTION)
     }
 
-    override fun equals(other: Any?) =
-        this === other || other is Chance && this.equals(other)
+    override fun equals(other: Any?): Boolean {
+        return this === other || equals(other as? Chance)
+    }
 
-    private fun equals(other: Chance) =
-        this.fraction == other.fraction
+    private fun equals(chance: Chance?) = chance?.fraction == fraction
 
     override fun hashCode() =
         fraction.hashCode()

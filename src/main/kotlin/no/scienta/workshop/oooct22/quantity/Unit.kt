@@ -15,21 +15,11 @@ class Unit<D : Dimension> private constructor(
         ?: throw IllegalStateException("The base unit needs an explicit dimension"),
 ) {
 
-    constructor(dimension: D, name: String, pluralName: String) : this(
-        1,
-        null,
-        name,
-        pluralName,
-        dimension
-    )
+    constructor(dimension: D, name: String, pluralName: String)
+            : this(1, null, name, pluralName, dimension)
 
-    constructor(ratio: Int, unit: Unit<D>, name: String, pluralName: String) : this(
-        ratio.takeIf { it > 0 } ?: throw IllegalArgumentException("The unit must be positive: $ratio"),
-        unit,
-        name,
-        pluralName,
-        unit.dimension
-    )
+    constructor(ratio: Int, unit: Unit<D>, name: String, pluralName: String)
+            : this(positive(ratio), unit, name, pluralName, unit.dimension)
 
     internal fun isComparableWith(unit: Unit<*>): Boolean = dimension === unit.dimension
 
@@ -37,6 +27,11 @@ class Unit<D : Dimension> private constructor(
         amount * baseRatio(terminator)
 
     internal fun unitRange(): List<Unit<D>> = listOf(this) + (unit?.unitRange() ?: emptyList())
+
+    companion object {
+        private fun positive(ratio: Int) = (ratio.takeIf { it > 0 }
+            ?: throw IllegalArgumentException("The unit must be positive: $ratio"))
+    }
 
     private fun baseRatio(terminator: Unit<D>? = null): Int =
         this.ratio * (unit?.takeIf { it != terminator }?.baseRatio(terminator) ?: 1)
