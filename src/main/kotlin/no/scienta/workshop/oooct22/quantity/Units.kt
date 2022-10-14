@@ -1,34 +1,26 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
 package no.scienta.workshop.oooct22.quantity
 
-object Teaspoon : BaseUnit<Volume>(Volume)
-typealias Teaspoons = Teaspoon
+object Units {
 
-object Tablespoon : Unit<Volume>(3, Teaspoons)
-typealias Tablespoons = Tablespoon
+    val teaspoon = baseUnit(Volume)
 
-object Ounce : Unit<Volume>(2, Tablespoons)
-typealias Ounces = Ounce
+    val tablespoon = unit(3, teaspoon)
 
-object Cup : Unit<Volume>(8, Ounces)
-typealias Cups = Cup
+    val ounce = unit(2, tablespoon)
 
-object Pint : Unit<Volume>(2, Cups)
-typealias Pints = Pint
+    val cup = unit(8, ounce)
 
-object Quart : Unit<Volume>(2, Pints)
-typealias Quarts = Quart
+    val pint = unit(2, cup)
 
-object Gallon : Unit<Volume>(4, Quarts)
-typealias Gallons = Gallon
+    val quart = unit(2, pint)
 
-object Inch : BaseUnit<Distance>(Distance)
-typealias Inches = Inch
+    val gallon = unit(4, quart)
 
-object Foot : Unit<Distance>(12, Inches)
-typealias Feet = Foot
+    val inch = baseUnit(Distance)
 
-object Yard : Unit<Distance>(3, Feet)
-typealias Yards = Yard
+    val foot = unit(12, inch)
 
+    val yard = unit(3, foot)
+}

@@ -1,9 +1,10 @@
 package no.scienta.workshop.oooct22.quantity
 
-import java.lang.IllegalArgumentException
-import kotlin.IllegalStateException
+fun <D : Dimension> baseUnit(dimension: D): Unit<D> = Unit(dimension)
 
-open class Unit<D : Dimension> private constructor(
+fun <D : Dimension> unit(ratio: Int, unit: Unit<D>) = Unit(ratio, unit)
+
+class Unit<D : Dimension> private constructor(
     private val ratio: Int,
     private val unit: Unit<D>? = null,
     internal val dimension: D = unit?.dimension
@@ -30,5 +31,3 @@ open class Unit<D : Dimension> private constructor(
 
     override fun toString(): String = "${javaClass.simpleName}/${dimension}"
 }
-
-open class BaseUnit<D : Dimension>(dimension: D) : Unit<D>(dimension)
