@@ -8,16 +8,18 @@ class Quantity<D : Dimension> internal constructor(private val amount: Int, priv
         if (unit == this.unit) this else Quantity(this.unit.baseAmount(amount, unit), unit)
 
     operator fun plus(quantity: Quantity<D>) =
-        commonUnit(quantity).let {
-            val q1 = convertedTo(it)
-            val q2 = quantity.convertedTo(it)
-            Quantity(q1.amount + q2.amount, it)
+        commonUnit(quantity).let { commonUnit ->
+            Quantity(amountIn(commonUnit, quantity), commonUnit)
         }
 
     private fun commonUnit(quantity: Quantity<D>) =
         unit.unitRange().reversed().zip(quantity.unit.unitRange().reversed())
             .map { (u1, _) -> u1 }
             .last()
+
+    private fun amountIn(common: Unit<D>, quantity: Quantity<D>) =
+        listOf(this.convertedTo(common), quantity.convertedTo(common))
+            .sumOf { it.amount }
 
     override fun equals(other: Any?) =
         other is Quantity<*> && unit.isComparableWith(other.unit) && baseAmount == other.baseAmount
