@@ -4,23 +4,23 @@ package no.scienta.workshop.oooct22.quantity
 
 object Units {
 
-    val teaspoon = baseUnit(Volume)
+    val teaspoon = base("teaspoon", Volume)
 
-    val tablespoon = unit(3, teaspoon)
+    val tablespoon = unit("tablespoon", 3, teaspoon)
 
-    val ounce = unit(2, tablespoon)
+    val ounce = unit("ounce", 2, tablespoon)
 
-    val cup = unit(8, ounce)
+    val cup = unit("cup", 8, ounce)
 
-    val pint = unit(2, cup)
+    val pint = unit("pint", 2, cup)
 
-    val quart = unit(2, pint)
+    val quart = unit("quart", 2, pint)
 
-    val gallon = unit(4, quart)
+    val gallon = unit("gallon", 4, quart)
 
-    val inch = baseUnit(Distance)
+    val inch = base("inch", Distance, plural = "inches")
 
-    val foot = unit(12, inch)
+    val foot = unit("foot", 12, inch, plural = "feet")
 
-    val yard = unit(3, foot)
+    val yard = unit("yard", 3, foot)
 }

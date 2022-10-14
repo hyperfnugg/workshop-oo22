@@ -27,14 +27,27 @@ class CookingVolumesTest {
         assertEquals(3 unitsOf foot, 36 unitsOf inch)
         assertEquals(3 unitsOf yard, 9 unitsOf foot)
 
+        assertEquals("9 feet", (9 unitsOf foot).toString())
+
+        val tablespoons = (2 unitsOf pint) convertedTo tablespoon
+
+        assertEquals("64 tablespoons", tablespoons.toString())
+
+        val tablespoonsAdded = (2 unitsOf pint) + (3 unitsOf tablespoon)
+        assertEquals(tablespoonsAdded.toString(), "67 tablespoons")
+
+        assertEquals("30 feet", ((5 unitsOf yard) + (15 unitsOf foot)).toString())
+
         assertEquals(setOf(1 unitOf tablespoon, 3 unitsOf teaspoon).size, 1)
         assertEquals(setOf(30 unitsOf teaspoon, 10 unitsOf tablespoon, 5 unitsOf ounce).size, 1)
-        assertEquals(setOf(
-            30 unitsOf teaspoon,
-            10 unitsOf tablespoon,
-            5 unitsOf ounce,
-            1 unitOf teaspoon
-        ).size, 2)
+        assertEquals(
+            setOf(
+                30 unitsOf teaspoon,
+                10 unitsOf tablespoon,
+                5 unitsOf ounce,
+                1 unitOf teaspoon
+            ).size, 2
+        )
 
     }
 
